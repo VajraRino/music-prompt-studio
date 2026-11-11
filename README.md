@@ -1,0 +1,25 @@
+# Music Prompt Studio — PWA
+
+ジャンル、雰囲気、テンポ、楽器、ボーカル、曲構成、自由記述を選んでAI作曲用の英語プロンプトを生成する、完全静的なWebアプリです。
+
+## 機能
+- 複数選択と即時プロンプト生成
+- コピー、Web Share APIによる共有
+- お気に入り保存・読み込み・削除（localStorage、端末・ブラウザごと）
+- JSONバックアップのエクスポート／インポート
+- レスポンシブUI、PWAホーム画面追加、Service Workerによるオフライン対応
+- 外部API、アカウント、課金、ビルド不要
+
+## 公開方法：GitHub Pages
+1. GitHubにログインし、新規リポジトリを作成します（例：`music-prompt-studio`）。
+2. このフォルダ内の **7ファイル**（`index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `icon.svg`, `icon-192.png`, `icon-512.png`）をリポジトリのルートにアップロードしてコミットします。README.mdは任意です。
+3. リポジトリの **Settings → Pages → Build and deployment → Source** で **Deploy from a branch** を選び、Branchを **main / (root)** にして保存します。
+4. 公開完了後、`https://<GitHubユーザー名>.github.io/music-prompt-studio/` にアクセスします。実際のURLはPages設定画面で確認してください。
+5. **Android**: Chromeでサイトを開き、メニューから「アプリをインストール」または「ホーム画面に追加」。**iPhone**: Safariで開き、共有メニューから「ホーム画面に追加」。表示項目はOSバージョンによって異なります。
+6. 一度オンラインでサイトを読み込むと、次回からはオフラインでも主要機能を利用できます。オフライン動作は機内モードで再起動して確認してください。
+
+## ローカルテスト
+`index.html`を直接開くとUIは使える場合がありますが、Service Workerは `file://` では動作しません。PCでオフライン機能までテストする場合はこのフォルダで `python -m http.server 8000` を実行し、`http://localhost:8000` を開いてください。スマホでのPWAインストールはHTTPS公開URLを使ってください。
+
+## 注意
+保存データは端末のブラウザ内にのみ存在し、別端末とは同期しません。ブラウザデータ削除で消えるため、定期的にJSONバックアップを保存してください。公開サイトのファイルを更新した場合、キャッシュ更新を確実にするには `sw.js` の `CACHE` バージョンを増やしてください。
